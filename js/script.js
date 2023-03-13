@@ -8,6 +8,7 @@ const harryPotter = new Book(
   223,
   true
 );
+
 let myLibrary = [];
 
 const bookDisplay = document.querySelector("#bookDisplay");
@@ -42,10 +43,27 @@ console.log(myLibrary);
 
 function displayBooks(myLibrary) {
   myLibrary.forEach(function (entry) {
-    let bookSlot = document.createElement("div");
-    main.appendChild(bookSlot);
-    bookSlot.innerHTML = entry.info();
+    createBookEntry(entry);
   });
+}
+
+function createBookEntry(book) {
+  let bookEntry = document.createElement("div");
+  let bookTitle = document.createElement("h3");
+  let bookAuthor = document.createElement("p");
+  let bookPages = document.createElement("p");
+  let bookReadStatus = document.createElement("p");
+  main.prepend(bookEntry);
+  bookEntry.append(bookTitle, bookAuthor, bookPages, bookReadStatus);
+  bookTitle.innerHTML = book.title;
+  bookAuthor.innerHTML = book.author;
+  bookPages.innerHTML = book.numPages;
+  bookReadStatus.innerHTML = book.haveRead;
+  bookEntry.classList.add("bookEntryCard");
+  bookTitle.classList.add("bookTitle");
+  bookAuthor.classList.add("bookAuthor");
+  bookPages.classList.add("bookPages");
+  bookReadStatus.classList.add("bookReadStatus");
 }
 
 displayBooks(myLibrary);
