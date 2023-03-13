@@ -1,17 +1,40 @@
 /* eslint-disable no-unused-vars */
 const main = document.querySelector(".main");
+const addNewBtn = document.querySelector(".addBookBtn");
+const addEntry_menu = document.querySelector(".addEntry-menu");
 
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-const harryPotter = new Book(
-  "Harry Potter and the Philosopher's Stone",
-  "J. K. Rowling",
-  223,
-  true
-);
+const bookTitleField = document.querySelector("#bookTitleField");
+const bookAuthorField = document.querySelector("#bookAuthorField");
+const pagesField = document.querySelector("#pagesField");
+const readStatusField = document.querySelector("#readStatusField");
+const addBtn = document.querySelector("#addBtn");
+const cancelBtn = document.querySelector("#cancelBtn");
+
+//Event listener to Add New Book Entry
+addNewBtn.addEventListener("click", function () {
+  addEntry_menu.classList.toggle("is-active");
+});
+
+//Event listener to Add/Cancel Addition of New Book Entry
+addBtn.addEventListener("click", function () {
+  let read = false;
+  readStatusField.checked == true ? (read = true) : (read = false);
+  let bookEntry = new Book(
+    bookTitleField.value,
+    bookAuthorField.value,
+    pagesField.value,
+    read
+  );
+  addBookToLibrary(bookEntry);
+  refreshBookEntries();
+  addEntry_menu.classList.toggle("is-active");
+});
+
+cancelBtn.addEventListener("click", function () {
+  addEntry_menu.classList.toggle("is-active");
+});
 
 let myLibrary = [];
-
-const bookDisplay = document.querySelector("#bookDisplay");
 
 // Makes Book Objects (string, string, number, boolean))//
 function Book(title, author, numPages, haveRead) {
@@ -31,15 +54,9 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.numPages}, ${this.haveRead}`;
 };
 
-console.log(theHobbit.info());
-
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
-
-addBookToLibrary(theHobbit);
-addBookToLibrary(harryPotter);
-console.log(myLibrary);
 
 function displayBooks(myLibrary) {
   myLibrary.forEach(function (entry) {
@@ -66,4 +83,18 @@ function createBookEntry(book) {
   bookReadStatus.classList.add("bookReadStatus");
 }
 
-displayBooks(myLibrary);
+function refreshBookEntries() {
+  main.querySelectorAll(".bookEntryCard").forEach((el) => el.remove());
+  displayBooks(myLibrary);
+}
+
+console.log(myLibrary);
+
+//Example Book Entries
+// const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+// const harryPotter = new Book(
+//   "Harry Potter and the Philosopher's Stone",
+//   "J. K. Rowling",
+//   223,
+//   true
+// );
