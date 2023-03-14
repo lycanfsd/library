@@ -8,16 +8,24 @@ html,
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: medium;
-  background-color: antiquewhite;
   height: 100vh;
   width: 100vw;
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  background-image: url(../img/main-background.svg);
+  background-color: antiquewhite;
+  background-blend-mode: overlay;
+}
+
+.container {
   display: grid;
   grid-template: auto 1fr auto / repeat(4, 1fr);
-  background-image: url(../img/main-background.svg);
-  background-blend-mode: overlay;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Header CSS */
@@ -61,11 +69,14 @@ body {
   grid-column: 1 / 5;
   grid-row: 2 / 3;
   display: grid;
-  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-template-rows: repeat(3, minmax(200px, 1fr));
+  grid-auto-rows: 1fr;
 }
 
 .main > div {
-  border: solid green 2px;
+  border: solid black 1px;
+  box-shadow: 2px 2px 2px;
 }
 
 .addBookBtn {
@@ -93,7 +104,7 @@ body {
 .plusBar:hover::after {
   transition: 1s;
   transform: rotate(90deg) scale(1.05);
-  background-color: purple;
+  background-color: lightgreen;
 }
 
 .plusBar::after {
@@ -111,6 +122,13 @@ body {
   margin: 10px;
   padding: 1rem;
   text-align: center;
+}
+
+.bookEntryCard:hover,
+.addNewBook:hover {
+  transition: 0.2s;
+  transform: scale(1.02);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Add new book entry popup menu */
@@ -160,8 +178,8 @@ body {
   background-color: antiquewhite;
   border: solid black 1px;
   place-content: center;
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
-  height: 5%;
+  height: 40px;
 }
