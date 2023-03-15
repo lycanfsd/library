@@ -70,17 +70,26 @@ function createBookEntry(book) {
   let bookAuthor = document.createElement("p");
   let bookPages = document.createElement("p");
   let bookReadStatus = document.createElement("p");
+  let removeBtn = document.createElement("button");
   main.prepend(bookEntry);
-  bookEntry.append(bookTitle, bookAuthor, bookPages, bookReadStatus);
+  bookEntry.append(bookTitle, bookAuthor, bookPages, bookReadStatus, removeBtn);
   bookTitle.innerHTML = book.title;
   bookAuthor.innerHTML = book.author;
   bookPages.innerHTML = book.numPages;
   bookReadStatus.innerHTML = book.haveRead;
+  removeBtn.innerHTML = "Remove";
   bookEntry.classList.add("bookEntryCard");
   bookTitle.classList.add("bookTitle");
   bookAuthor.classList.add("bookAuthor");
   bookPages.classList.add("bookPages");
   bookReadStatus.classList.add("bookReadStatus");
+  removeBtn.classList.add("removeBtn");
+
+  //Function that removes a book from grid of book entries
+  removeBtn.addEventListener("click", function () {
+    myLibrary.splice(myLibrary.indexOf(book), 1);
+    refreshBookEntries();
+  });
 }
 
 function refreshBookEntries() {
