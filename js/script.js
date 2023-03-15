@@ -82,9 +82,9 @@ function createBookEntry(book) {
     readBtn,
     removeBtn
   );
-  bookTitle.innerHTML = book.title;
-  bookAuthor.innerHTML = book.author;
-  bookPages.innerHTML = book.numPages;
+  bookTitle.innerHTML = `"${book.title}"`;
+  bookAuthor.innerHTML = `by ${book.author}`;
+  bookPages.innerHTML = `${book.numPages} pages`;
   readBtn.innerHTML = "Read";
   removeBtn.innerHTML = "Remove";
   bookEntry.classList.add("bookEntryCard");
