@@ -28,6 +28,7 @@ addBtn.addEventListener("click", function () {
   addBookToLibrary(bookEntry);
   refreshBookEntries();
   addEntry_menu.classList.toggle("is-active");
+  document.getElementById("addBookForm").reset();
 });
 
 cancelBtn.addEventListener("click", function () {
