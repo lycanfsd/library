@@ -71,22 +71,51 @@ function createBookEntry(book) {
   let bookAuthor = document.createElement("p");
   let bookPages = document.createElement("p");
   let bookReadStatus = document.createElement("p");
+  let readBtn = document.createElement("button");
   let removeBtn = document.createElement("button");
   main.prepend(bookEntry);
-  bookEntry.append(bookTitle, bookAuthor, bookPages, bookReadStatus, removeBtn);
+  bookEntry.append(
+    bookTitle,
+    bookAuthor,
+    bookPages,
+    bookReadStatus,
+    readBtn,
+    removeBtn
+  );
   bookTitle.innerHTML = book.title;
   bookAuthor.innerHTML = book.author;
   bookPages.innerHTML = book.numPages;
-  bookReadStatus.innerHTML = book.haveRead;
+  readBtn.innerHTML = "Read";
   removeBtn.innerHTML = "Remove";
   bookEntry.classList.add("bookEntryCard");
   bookTitle.classList.add("bookTitle");
   bookAuthor.classList.add("bookAuthor");
   bookPages.classList.add("bookPages");
   bookReadStatus.classList.add("bookReadStatus");
+  readBtn.classList.add("readBtn");
   removeBtn.classList.add("removeBtn");
 
-  //Function that removes a book from grid of book entries
+  if (book.haveRead != "Read") {
+    readBtn.style.backgroundColor = "red";
+    readBtn.innerHTML = "Not read";
+  } else {
+    readBtn.style.backgroundColor = "green";
+    readBtn.innerHTML = "Read";
+  }
+
+  readBtn.addEventListener("click", function () {
+    if (book.haveRead == "Read") {
+      book.haveRead = "Not read";
+      readBtn.innerHTML = "Not read";
+      readBtn.style.backgroundColor = "var(--notReadColor)";
+    } else if (book.haveRead == "Not read") {
+      book.haveRead = "Read";
+      readBtn.innerHTML = "Read";
+      readBtn.style.backgroundColor = "var(--readColor)";
+    }
+  });
+
+  //Event Listener that removes a book from grid of book entries
   removeBtn.addEventListener("click", function () {
     myLibrary.splice(myLibrary.indexOf(book), 1);
     refreshBookEntries();
